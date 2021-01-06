@@ -1,0 +1,229 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'install', '-g', 'n', 'stable' ]
+2 info using npm@3.5.2
+3 info using node@v8.10.0
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readGlobalPackageData
+7 silly fetchPackageMetaData n
+8 silly fetchPackageMetaData stable
+9 silly fetchNamedPackageData n
+10 silly mapToRegistry name n
+11 silly mapToRegistry using default registry
+12 silly mapToRegistry registry https://registry.npmjs.org/
+13 silly mapToRegistry uri https://registry.npmjs.org/n
+14 silly fetchNamedPackageData stable
+15 silly mapToRegistry name stable
+16 silly mapToRegistry using default registry
+17 silly mapToRegistry registry https://registry.npmjs.org/
+18 silly mapToRegistry uri https://registry.npmjs.org/stable
+19 verbose request uri https://registry.npmjs.org/n
+20 verbose request no auth needed
+21 info attempt registry request try #1 at 3:01:44 PM
+22 verbose request id 552a3e68749a6d8b
+23 http request GET https://registry.npmjs.org/n
+24 verbose request uri https://registry.npmjs.org/stable
+25 verbose request no auth needed
+26 info attempt registry request try #1 at 3:01:44 PM
+27 http request GET https://registry.npmjs.org/stable
+28 http 200 https://registry.npmjs.org/stable
+29 verbose headers { date: 'Mon, 26 Oct 2020 15:01:44 GMT',
+29 verbose headers   'content-type': 'application/json; charset=UTF-8',
+29 verbose headers   'transfer-encoding': 'chunked',
+29 verbose headers   connection: 'keep-alive',
+29 verbose headers   'set-cookie':
+29 verbose headers    [ '__cfduid=ddf9f50c59b9f4022f120d095d348df071603724504; expires=Wed, 25-Nov-20 15:01:44 GMT; path=/; domain=.npmjs.org; HttpOnly; SameSite=Lax' ],
+29 verbose headers   'cf-ray': '5e850de80a4eea66-IAD',
+29 verbose headers   age: '7058',
+29 verbose headers   'cache-control': 'public, max-age=300',
+29 verbose headers   etag: 'W/"3cfe4569de942571eefe249fa13d01d2"',
+29 verbose headers   'last-modified': 'Sun, 27 May 2018 18:08:59 GMT',
+29 verbose headers   vary: 'accept-encoding, accept',
+29 verbose headers   'cf-cache-status': 'HIT',
+29 verbose headers   'cf-request-id': '060707050a0000ea66caa87000000001',
+29 verbose headers   'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+29 verbose headers   server: 'cloudflare',
+29 verbose headers   'content-encoding': 'gzip' }
+30 silly get cb [ 200,
+30 silly get   { date: 'Mon, 26 Oct 2020 15:01:44 GMT',
+30 silly get     'content-type': 'application/json; charset=UTF-8',
+30 silly get     'transfer-encoding': 'chunked',
+30 silly get     connection: 'keep-alive',
+30 silly get     'set-cookie':
+30 silly get      [ '__cfduid=ddf9f50c59b9f4022f120d095d348df071603724504; expires=Wed, 25-Nov-20 15:01:44 GMT; path=/; domain=.npmjs.org; HttpOnly; SameSite=Lax' ],
+30 silly get     'cf-ray': '5e850de80a4eea66-IAD',
+30 silly get     age: '7058',
+30 silly get     'cache-control': 'public, max-age=300',
+30 silly get     etag: 'W/"3cfe4569de942571eefe249fa13d01d2"',
+30 silly get     'last-modified': 'Sun, 27 May 2018 18:08:59 GMT',
+30 silly get     vary: 'accept-encoding, accept',
+30 silly get     'cf-cache-status': 'HIT',
+30 silly get     'cf-request-id': '060707050a0000ea66caa87000000001',
+30 silly get     'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+30 silly get     server: 'cloudflare',
+30 silly get     'content-encoding': 'gzip' } ]
+31 verbose get saving stable to /home/modernwaiter/.npm/registry.npmjs.org/stable/.cache.json
+32 http 200 https://registry.npmjs.org/n
+33 verbose headers { date: 'Mon, 26 Oct 2020 15:01:44 GMT',
+33 verbose headers   'content-type': 'application/json',
+33 verbose headers   'transfer-encoding': 'chunked',
+33 verbose headers   connection: 'keep-alive',
+33 verbose headers   'set-cookie':
+33 verbose headers    [ '__cfduid=d68d720afa51c038de25d584309a4e1e31603724504; expires=Wed, 25-Nov-20 15:01:44 GMT; path=/; domain=.npmjs.org; HttpOnly; SameSite=Lax' ],
+33 verbose headers   'cf-ray': '5e850de80d2cf0fe-IAD',
+33 verbose headers   age: '6054',
+33 verbose headers   'cache-control': 'public, max-age=300',
+33 verbose headers   etag: 'W/"2fff561a11adc6a7ba2cfbd0be110762"',
+33 verbose headers   'last-modified': 'Sat, 25 Jul 2020 10:04:33 GMT',
+33 verbose headers   vary: 'accept-encoding, accept',
+33 verbose headers   'cf-cache-status': 'HIT',
+33 verbose headers   'cf-request-id': '06070705040000f0fe0dba6000000001',
+33 verbose headers   'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+33 verbose headers   server: 'cloudflare',
+33 verbose headers   'content-encoding': 'gzip' }
+34 silly get cb [ 200,
+34 silly get   { date: 'Mon, 26 Oct 2020 15:01:44 GMT',
+34 silly get     'content-type': 'application/json',
+34 silly get     'transfer-encoding': 'chunked',
+34 silly get     connection: 'keep-alive',
+34 silly get     'set-cookie':
+34 silly get      [ '__cfduid=d68d720afa51c038de25d584309a4e1e31603724504; expires=Wed, 25-Nov-20 15:01:44 GMT; path=/; domain=.npmjs.org; HttpOnly; SameSite=Lax' ],
+34 silly get     'cf-ray': '5e850de80d2cf0fe-IAD',
+34 silly get     age: '6054',
+34 silly get     'cache-control': 'public, max-age=300',
+34 silly get     etag: 'W/"2fff561a11adc6a7ba2cfbd0be110762"',
+34 silly get     'last-modified': 'Sat, 25 Jul 2020 10:04:33 GMT',
+34 silly get     vary: 'accept-encoding, accept',
+34 silly get     'cf-cache-status': 'HIT',
+34 silly get     'cf-request-id': '06070705040000f0fe0dba6000000001',
+34 silly get     'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+34 silly get     server: 'cloudflare',
+34 silly get     'content-encoding': 'gzip' } ]
+35 verbose get saving n to /home/modernwaiter/.npm/registry.npmjs.org/n/.cache.json
+36 silly install normalizeTree
+37 silly loadCurrentTree Finishing
+38 silly loadIdealTree Starting
+39 silly install loadIdealTree
+40 silly cloneCurrentTree Starting
+41 silly install cloneCurrentTreeToIdealTree
+42 silly cloneCurrentTree Finishing
+43 silly loadShrinkwrap Starting
+44 silly install loadShrinkwrap
+45 silly loadShrinkwrap Finishing
+46 silly loadAllDepsIntoIdealTree Starting
+47 silly install loadAllDepsIntoIdealTree
+48 silly resolveWithNewModule stable@0.1.8 checking installable status
+49 silly cache add args [ 'stable', null ]
+50 verbose cache add spec stable
+51 silly resolveWithNewModule n@6.7.0 checking installable status
+52 silly cache add args [ 'n', null ]
+53 verbose cache add spec n
+54 silly cache add parsed spec Result {
+54 silly cache add   raw: 'stable',
+54 silly cache add   scope: null,
+54 silly cache add   name: 'stable',
+54 silly cache add   rawSpec: '',
+54 silly cache add   spec: 'latest',
+54 silly cache add   type: 'tag' }
+55 silly addNamed stable@latest
+56 verbose addNamed "latest" is being treated as a dist-tag for stable
+57 info addNameTag [ 'stable', 'latest' ]
+58 silly mapToRegistry name stable
+59 silly mapToRegistry using default registry
+60 silly mapToRegistry registry https://registry.npmjs.org/
+61 silly mapToRegistry uri https://registry.npmjs.org/stable
+62 verbose addNameTag registry:https://registry.npmjs.org/stable not in flight; fetching
+63 silly cache add parsed spec Result {
+63 silly cache add   raw: 'n',
+63 silly cache add   scope: null,
+63 silly cache add   name: 'n',
+63 silly cache add   rawSpec: '',
+63 silly cache add   spec: 'latest',
+63 silly cache add   type: 'tag' }
+64 silly addNamed n@latest
+65 verbose addNamed "latest" is being treated as a dist-tag for n
+66 info addNameTag [ 'n', 'latest' ]
+67 silly mapToRegistry name n
+68 silly mapToRegistry using default registry
+69 silly mapToRegistry registry https://registry.npmjs.org/
+70 silly mapToRegistry uri https://registry.npmjs.org/n
+71 verbose addNameTag registry:https://registry.npmjs.org/n not in flight; fetching
+72 verbose get https://registry.npmjs.org/stable not expired, no request
+73 silly addNameTag next cb for stable with tag latest
+74 silly addNamed stable@0.1.8
+75 verbose addNamed "0.1.8" is a plain semver version for stable
+76 verbose get https://registry.npmjs.org/n not expired, no request
+77 silly addNameTag next cb for n with tag latest
+78 silly addNamed n@6.7.0
+79 verbose addNamed "6.7.0" is a plain semver version for n
+80 silly mapToRegistry name stable
+81 silly mapToRegistry using default registry
+82 silly mapToRegistry registry https://registry.npmjs.org/
+83 silly mapToRegistry uri https://registry.npmjs.org/stable
+84 verbose addRemoteTarball https://registry.npmjs.org/stable/-/stable-0.1.8.tgz not in flight; adding
+85 verbose addRemoteTarball [ 'https://registry.npmjs.org/stable/-/stable-0.1.8.tgz',
+85 verbose addRemoteTarball   '836eb3c8382fe2936feaf544631017ce7d47a3cf' ]
+86 silly mapToRegistry name n
+87 silly mapToRegistry using default registry
+88 silly mapToRegistry registry https://registry.npmjs.org/
+89 silly mapToRegistry uri https://registry.npmjs.org/n
+90 verbose addRemoteTarball https://registry.npmjs.org/n/-/n-6.7.0.tgz not in flight; adding
+91 verbose addRemoteTarball [ 'https://registry.npmjs.org/n/-/n-6.7.0.tgz',
+91 verbose addRemoteTarball   '95b4b5d338edb6959f2f4603400fcd093c372af1' ]
+92 info retry fetch attempt 1 at 3:01:44 PM
+93 info attempt registry request try #1 at 3:01:44 PM
+94 http fetch GET https://registry.npmjs.org/stable/-/stable-0.1.8.tgz
+95 info retry fetch attempt 1 at 3:01:44 PM
+96 info attempt registry request try #1 at 3:01:44 PM
+97 http fetch GET https://registry.npmjs.org/n/-/n-6.7.0.tgz
+98 http fetch 200 https://registry.npmjs.org/stable/-/stable-0.1.8.tgz
+99 silly fetchAndShaCheck shasum 836eb3c8382fe2936feaf544631017ce7d47a3cf
+100 verbose addTmpTarball /tmp/npm-23212-5d738b3a/registry.npmjs.org/stable/-/stable-0.1.8.tgz not in flight; adding
+101 verbose addTmpTarball already have metadata; skipping unpack for stable@0.1.8
+102 silly cache afterAdd stable@0.1.8
+103 verbose afterAdd /home/modernwaiter/.npm/stable/0.1.8/package/package.json not in flight; writing
+104 verbose afterAdd /home/modernwaiter/.npm/stable/0.1.8/package/package.json written
+105 http fetch 200 https://registry.npmjs.org/n/-/n-6.7.0.tgz
+106 silly fetchAndShaCheck shasum 95b4b5d338edb6959f2f4603400fcd093c372af1
+107 verbose addTmpTarball /tmp/npm-23212-5d738b3a/registry.npmjs.org/n/-/n-6.7.0.tgz not in flight; adding
+108 verbose addTmpTarball already have metadata; skipping unpack for n@6.7.0
+109 silly cache afterAdd n@6.7.0
+110 verbose afterAdd /home/modernwaiter/.npm/n/6.7.0/package/package.json not in flight; writing
+111 verbose afterAdd /home/modernwaiter/.npm/n/6.7.0/package/package.json written
+112 silly loadAllDepsIntoIdealTree Finishing
+113 silly idealTree:prePrune lib
+113 silly idealTree:prePrune ├── n@6.7.0
+113 silly idealTree:prePrune └── stable@0.1.8
+114 silly loadIdealTree Finishing
+115 silly currentTree lib
+115 silly currentTree └── stable@0.1.8
+116 silly idealTree lib
+116 silly idealTree ├── n@6.7.0
+116 silly idealTree └── stable@0.1.8
+117 silly generateActionsToTake Starting
+118 silly install generateActionsToTake
+119 warn checkPermissions Missing write access to /usr/local/lib/node_modules/stable
+120 warn checkPermissions Missing write access to /usr/local/lib/node_modules
+121 silly rollbackFailedOptional Starting
+122 silly rollbackFailedOptional Finishing
+123 silly runTopLevelLifecycles Starting
+124 silly runTopLevelLifecycles Finishing
+125 silly install printInstalled
+126 verbose stack Error: EACCES: permission denied, access '/usr/local/lib/node_modules/stable'
+127 verbose cwd /home/modernwaiter/CPEN321-ModernWaiter/BackEnd
+128 error Linux 5.4.0-1031-azure
+129 error argv "/usr/bin/node" "/usr/bin/npm" "install" "-g" "n" "stable"
+130 error node v8.10.0
+131 error npm  v3.5.2
+132 error path /usr/local/lib/node_modules/stable
+133 error code EACCES
+134 error errno -13
+135 error syscall access
+136 error Error: EACCES: permission denied, access '/usr/local/lib/node_modules/stable'
+136 error  { Error: EACCES: permission denied, access '/usr/local/lib/node_modules/stable'
+136 error   errno: -13,
+136 error   code: 'EACCES',
+136 error   syscall: 'access',
+136 error   path: '/usr/local/lib/node_modules/stable' }
+137 error Please try running this command again as root/Administrator.
+138 verbose exit [ -13, true ]

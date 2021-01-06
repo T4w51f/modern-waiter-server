@@ -1,0 +1,16 @@
+[debug] [2020-10-26T17:58:18.384Z] ----------------------------------------------------------------------
+[debug] [2020-10-26T17:58:18.386Z] Command:       /home/modernwaiter/.nvm/versions/node/v12.19.0/bin/node /home/modernwaiter/.nvm/versions/node/v12.19.0/bin/firebase login
+[debug] [2020-10-26T17:58:18.386Z] CLI Version:   8.13.1
+[debug] [2020-10-26T17:58:18.386Z] Platform:      linux
+[debug] [2020-10-26T17:58:18.386Z] Node Version:  v12.19.0
+[debug] [2020-10-26T17:58:18.386Z] Time:          Mon Oct 26 2020 17:58:18 GMT+0000 (Coordinated Universal Time)
+[debug] [2020-10-26T17:58:18.386Z] ----------------------------------------------------------------------
+[debug] [2020-10-26T17:58:18.387Z] 
+[info] i  Firebase optionally collects CLI usage and error reporting information to help improve our products. Data is collected in accordance with Google's privacy policy (https://policies.google.com/privacy) and is not used to identify you.
+ 
+[info] i  To change your data collection preference at any time, run `firebase logout` and log in again. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=789707861&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+[info] 
+[info] Waiting for authentication...
