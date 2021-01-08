@@ -22,8 +22,8 @@ function getRestaurant(req, res){
             res.status(400).send(err)
             return
         }
-        console.log("Result = ", result, ", id = ", id)
-        res.status(200).send(result)
+        
+        res.status(200).send(result.rows)
         return
     })
 }
