@@ -20,45 +20,49 @@ app.listen(process.env.PORT || 3002, () => {
 
 /*********************** REST API routes ****************************/
 
-// Routes for items
-app.get("/items/:restaurantId", items.getMenu)
-app.post("/items", items.addToMenu)
+app.get('/_health', (req, res) => {
+    res.status(200).send('ok')
+  })
 
-// Routes for ordered items
-app.get("/ordered-items/:orderId", ordered_items.getOrderedItems)
-app.post("/ordered-items", ordered_items.addOrderedItems)
-app.put("/ordered-items/paid", ordered_items.updateOrderedItemPaidStatus)
-app.put("/ordered-items/selected", ordered_items.updateSelectedStatus)
+// // Routes for items
+// app.get("/items/:restaurantId", items.getMenu)
+// app.post("/items", items.addToMenu)
 
-// Routes for orders
-app.post("/orders", orders.createOrder)
-app.get("/orders/user/:users_id", orders.getUserOrder)
-app.get("/orders/table/:tables_id", orders.getTableOrder)
-app.put("/orders/session", orders.updateOrderSessionStatus)
-app.put("/orders/paid", orders.updateOrderPaidStatus)
+// // Routes for ordered items
+// app.get("/ordered-items/:orderId", ordered_items.getOrderedItems)
+// app.post("/ordered-items", ordered_items.addOrderedItems)
+// app.put("/ordered-items/paid", ordered_items.updateOrderedItemPaidStatus)
+// app.put("/ordered-items/selected", ordered_items.updateSelectedStatus)
 
-// Routes for Stripe (external API)
-app.get('/key', payment.getStripeKey)
-app.post('/pay', payment.createStripePayment)
+// // Routes for orders
+// app.post("/orders", orders.createOrder)
+// app.get("/orders/user/:users_id", orders.getUserOrder)
+// app.get("/orders/table/:tables_id", orders.getTableOrder)
+// app.put("/orders/session", orders.updateOrderSessionStatus)
+// app.put("/orders/paid", orders.updateOrderPaidStatus)
 
-// Routes for item recommendation
-app.get("/recommendation/:userId/:restaurantId", recommendation.getItemRecommendation) 
-app.get("/recommendation/keywords", recommendation.getKeyWords) 
+// // Routes for Stripe (external API)
+// app.get('/key', payment.getStripeKey)
+// app.post('/pay', payment.createStripePayment)
 
-// Routes for restaurant
-app.get("/restaurants/:id", restaurants.getRestaurant)
-app.post("/restaurants", restaurants.addRestaurant)
+// // Routes for item recommendation
+// app.get("/recommendation/:userId/:restaurantId", recommendation.getItemRecommendation) 
+// app.get("/recommendation/keywords", recommendation.getKeyWords) 
 
-// Routes for table
-app.get("/tables/:id", tables.getTable)
-app.post("/tables", tables.addTable)
+// // Routes for restaurant
+// app.get("/restaurants/:id", restaurants.getRestaurant)
+// app.post("/restaurants", restaurants.addRestaurant)
 
-// Routes for user
-app.post("/users", users.addUser)
-app.get("/users/:id", users.getUserById)
-app.get("/users/google/:googleId", users.getUserByGoogleId)
-app.get("/users/preferences/:id", users.getUserPreferences)
-app.put("/users/preferences", users.updateUserPreferences)
+// // Routes for table
+// app.get("/tables/:id", tables.getTable)
+// app.post("/tables", tables.addTable)
+
+// // Routes for user
+// app.post("/users", users.addUser)
+// app.get("/users/:id", users.getUserById)
+// app.get("/users/google/:googleId", users.getUserByGoogleId)
+// app.get("/users/preferences/:id", users.getUserPreferences)
+// app.put("/users/preferences", users.updateUserPreferences)
 
 /**
  * HTTP POST request to register token for
