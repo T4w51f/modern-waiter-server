@@ -1,4 +1,4 @@
-const pool = require("../config.js")
+const { pool } = require('./../config')
 const push_notification = require("../push_notification.js")
 
 /**

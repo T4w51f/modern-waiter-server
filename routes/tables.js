@@ -1,4 +1,4 @@
-const pool = require("../config.js")
+const { pool } = require('./../config')
 
 /**
  * Gets details of the table
