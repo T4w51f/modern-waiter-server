@@ -1,6 +1,4 @@
-const mysql = require('mysql')
-const sql = require("./../sql_connection.js")
-const con = sql.getConnection()
+const pool = require("../config.js")
 
 /**
  * Acquires items of a restaurant representing its 
@@ -18,12 +16,7 @@ function getMenu(req, res){
         return
     }
 
-    let sql_query = mysql.format("SELECT * FROM items WHERE restaurant_id = ?", [restaurantId])
-    con.query(sql_query, function(err, result){
-        // if (err) {
-        //     res.status(400).send({code : err.code, errno : err.errno})
-        //     return
-        // }
+    pool.query("SELECT * FROM items WHERE restaurant_id = ?", [restaurantId], function(err, result){
         res.status(200).send(result)
         return
     })
@@ -50,8 +43,7 @@ function addToMenu(req, res){
         return
     }
 
-    let sql_query = mysql.format("INSERT INTO items (restaurant_id, name, type, cost, description, calories, popularity_count, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [restaurantId, name, type, cost, description, calories, popularityCount, image])
-    con.query(sql_query, function(err, result){
+    pool.query("INSERT INTO items (restaurant_id, name, type, cost, description, calories, popularity_count, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [restaurantId, name, type, cost, description, calories, popularityCount, image], function(err, result){
         if (err) {
             res.status(400).send({code : err.code, errno : err.errno})
             return

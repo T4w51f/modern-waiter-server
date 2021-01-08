@@ -1,10 +1,7 @@
 const express = require("express")
-const mysql = require('mysql')
 const app = express()
 const push_notification = require("./push_notification.js")
-const sql = require("./sql_connection.js")
-const con = sql.getConnection()
-
+const sql = require("./config.js")
 const items = require('./routes/items.js')
 const ordered_items = require('./routes/ordered_items.js')
 const orders = require('./routes/orders.js')
@@ -13,6 +10,7 @@ const recommendation = require('./routes/recommendation.js')
 const restaurants = require('./routes/restaurants.js')
 const tables = require('./routes/tables.js')
 const users = require('./routes/users.js')
+const { pool } = require('./config')
 
 app.use(express.json())
 

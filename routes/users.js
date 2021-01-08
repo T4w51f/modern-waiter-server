@@ -1,6 +1,4 @@
-const mysql = require('mysql')
-const sql = require("./../sql_connection.js")
-const con = sql.getConnection()
+const pool = require("../config.js")
 
 /**
  * Gets details of a user
@@ -18,8 +16,7 @@ function getUserById(req, res){
         return
     }
     
-    let sql_query = mysql.format("SELECT * FROM users WHERE id = ?", [id])
-    con.query(sql_query, function(err, result){
+    pool.query("SELECT * FROM users WHERE id = ?", [id], function(err, result){
         res.status(200).send(result[0])
         return
     })
@@ -35,8 +32,7 @@ function getUserById(req, res){
 function getUserByGoogleId(req, res){
     console.log("GET /users/google/{{googleId}}")
     let googleId = req.params.googleId
-    let sql_query = mysql.format("SELECT * FROM users WHERE google_id = ?", [googleId])
-    con.query(sql_query, function(err, result){
+    pool.query("SELECT * FROM users WHERE google_id = ?", [googleId], function(err, result){
         res.status(200).send(result[0])
         return
     })
@@ -55,8 +51,7 @@ function addUser(req, res){
     let googleId = req.body.googleId
     let preferences = req.body.preferences 
 
-    let sql_query = mysql.format("INSERT INTO users (username, email, preferences, google_id) VALUES (?, ?, ?, ?)", [username, email, preferences, googleId])
-    con.query(sql_query, function(err, result){
+    pool.query("INSERT INTO users (username, email, preferences, google_id) VALUES (?, ?, ?, ?)", [username, email, preferences, googleId], function(err, result){
         if (err) {
             res.status(400).send(err)
             return
@@ -81,8 +76,7 @@ function getUserPreferences(req, res){
         return
     }
 
-    let sql_query = mysql.format("SELECT preferences FROM users WHERE id = ?", [id])
-    con.query(sql_query, function(err, result){
+    pool.query("SELECT preferences FROM users WHERE id = ?", [id], function(err, result){
         res.status(200).send(result[0])
         return
     })
@@ -110,8 +104,7 @@ function updateUserPreferences(req, res){
         return
     }
 
-    let sql_query = mysql.format("UPDATE users SET preferences = ? WHERE id = ?", [preferences, userId])
-    con.query(sql_query, function(err, result){
+    pool.query("UPDATE users SET preferences = ? WHERE id = ?", [preferences, userId], function(err, result){
         res.status(200).send()
         return
     })

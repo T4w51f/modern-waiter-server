@@ -1,6 +1,4 @@
-const mysql = require('mysql')
-const sql = require("./../sql_connection.js")
-const con = sql.getConnection()
+const pool = require("../config.js")
 
 /**
  * Gets details of the table
@@ -19,8 +17,7 @@ function getTable(req, res) {
         return
     }
 
-    let sql_query = mysql.format("SELECT * FROM tables WHERE id = ?", [id])
-    con.query(sql_query, function(err, result){
+    pool.query("SELECT * FROM tables WHERE id = ?", [id], function(err, result){
         res.status(200).send(result[0])
         return
     })
@@ -41,8 +38,7 @@ function addTable(req, res) {
         return
     }
 
-    let sql_query = mysql.format("INSERT INTO tables (table_number) VALUES (?)", [tableNumber])
-    con.query(sql_query, function(err, result){
+    pool.query("INSERT INTO tables (table_number) VALUES (?)", [tableNumber], function(err, result){
         res.status(200).send(result)
         return
     })

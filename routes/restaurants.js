@@ -1,6 +1,4 @@
-const mysql = require('mysql')
-const sql = require("./../sql_connection.js")
-const con = sql.getConnection()
+const pool = require("../config.js")
 
 /**
  * Acquires details of a
@@ -18,8 +16,7 @@ function getRestaurant(req, res){
         return
     }
 
-    let sql_query = mysql.format("SELECT * FROM restaurant WHERE id = ?", [id])
-    con.query(sql_query, function(err, result){
+    pool.query("SELECT * FROM restaurant WHERE id = ?", [id], function(err, result){
         res.status(200).send(result)
         return
     })
@@ -43,8 +40,7 @@ function addRestaurant(req, res){
     let name = req.body.name
     let location = req.body.location
 
-    let sql_query = mysql.format("INSERT INTO restaurant (name, location, tax_percentage, service_fee_percentage) VALUES (?, ?, ?, ?)", [name, location, taxPercentage, serviceFeePercentage])
-    con.query(sql_query, function(err, result){
+    pool.query("INSERT INTO restaurant (name, location, tax_percentage, service_fee_percentage) VALUES (?, ?, ?, ?)", [name, location, taxPercentage, serviceFeePercentage], function(err, result){
         if (err) {
             res.status(400).send({code : err.code, errno : err.errno})
             return

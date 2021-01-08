@@ -1,6 +1,4 @@
-const mysql = require('mysql')
-const sql = require("./../sql_connection.js")
-const con = sql.getConnection()
+const pool = require("../config.js")
 const push_notification = require("../push_notification.js")
 
 /**
@@ -19,8 +17,7 @@ function getOrderedItems(req, res){
         return
     }
 
-    let sql_query = mysql.format("SELECT * FROM ordered_items WHERE orders_id = ?", [orderId])
-    con.query(sql_query, function(err, result){
+    pool.query("SELECT * FROM ordered_items WHERE orders_id = ?", [orderId], function(err, result){
         res.status(200).send(result)
         return
     })
@@ -46,9 +43,9 @@ async function addOrderedItems(req, res){
             return
         }
         
-        let sql_query = mysql.format("INSERT INTO ordered_items (orders_id, items_id, has_paid, is_selected) VALUES(?, ?, 0, 0) ", [orderId,itemId])
-        con.query(sql_query, function(err, result){})
+        pool.query("INSERT INTO ordered_items (orders_id, items_id, has_paid, is_selected) VALUES(?, ?, 0, 0) ", [orderId,itemId], function(err, result){})
     }
+
     let orderId = parseInt(ordered_items[0].orderId,10)
     await push_notification.push_notification_order_received(orderId, req.body.userId)
     res.status(201).send()
@@ -72,8 +69,7 @@ async function updateSelectedStatus(req, res){
     }
 
     let notIsSelected = isSelected === 1 ? 0 : 1
-    let sql_query = mysql.format("UPDATE ordered_items SET is_selected = ?, users_id = ? WHERE orders_id = ? && items_id = ? && is_selected = ? && has_paid = 0 LIMIT 1", [isSelected, userId, orderId, itemId, notIsSelected])
-    con.query(sql_query, async function(err, result){
+    pool.query("UPDATE ordered_items SET is_selected = ?, users_id = ? WHERE orders_id = ? && items_id = ? && is_selected = ? && has_paid = 0 LIMIT 1", [isSelected, userId, orderId, itemId, notIsSelected], async function(err, result){
         res.status(200).send()
         await push_notification.push_notification_item_claimed(orderId)
         console.log(orderId + ":" + isSelected + " by " + userId + " for " + itemId)
@@ -99,8 +95,7 @@ function updateOrderedItemPaidStatus(req, res){
     let notHasPaid = hasPaid === 1 ? 0 : 1
     console.log("PUT /ordered-items/paid" + " for item: " + itemId + " in order: " + orderId + " to status: " + hasPaid)
 
-    let sql_query = mysql.format("UPDATE ordered_items SET has_paid = ? WHERE orders_id = ? && items_id = ? && has_paid = ? LIMIT 1", [hasPaid, orderId, itemId, notHasPaid])
-    con.query(sql_query, function(err, result){
+    pool.query("UPDATE ordered_items SET has_paid = ? WHERE orders_id = ? && items_id = ? && has_paid = ? LIMIT 1", [hasPaid, orderId, itemId, notHasPaid], function(err, result){
         res.status(201).send()
         return
     })

@@ -1,6 +1,4 @@
-const mysql = require('mysql')
-const sql = require("./../sql_connection.js")
-const con = sql.getConnection()
+const pool = require("../config.js")
 var recommendation = require("../recommendation_logic.js")
 
 /**
@@ -25,10 +23,7 @@ function getItemRecommendation(req, res){
     console.log("User: " + users_id)
     console.log("Restaurant: " + restaurant_id)
 
-    let user_query = mysql.format("SELECT preferences FROM users WHERE id = ?", [users_id])
-    let desc_query = mysql.format("SELECT id, description FROM items WHERE restaurant_id = ?", [restaurant_id])
-
-    con.query(user_query, function(err, prefResult){
+    pool.query("SELECT preferences FROM users WHERE id = ?", [users_id], function(err, prefResult){
         var preference
 
         try {
@@ -38,7 +33,7 @@ function getItemRecommendation(req, res){
             return
         }
 
-        con.query(desc_query, function(err, descResult) {
+        pool.query("SELECT id, description FROM items WHERE restaurant_id = ?", [restaurant_id], function(err, descResult) {
             var descriptionJsonArray = JSON.parse(JSON.stringify(descResult))
             var itemDescriptionMap = new Map()
 

@@ -1,7 +1,4 @@
-const mysql = require('mysql')
-const sql = require("./../sql_connection.js")
-const con = sql.getConnection()
-const push_notification = require("./../push_notification.js")
+const pool = require("../config.js")
 
  /**
   * Creates an order
@@ -22,9 +19,7 @@ function createOrder(req, res){
         return
     }
 
-    let sql_query = mysql.format("INSERT INTO orders ( users_id, tables_id, restaurant_id, amount, has_paid, is_active_session) VALUES(?,?,?,?,?,?)", [userId, tableId, restaurantId, amount, hasPaid, isActive])
-    
-    con.query(sql_query, function(err, result){
+    pool.query("INSERT INTO orders ( users_id, tables_id, restaurant_id, amount, has_paid, is_active_session) VALUES(?,?,?,?,?,?)", [userId, tableId, restaurantId, amount, hasPaid, isActive], function(err, result){
         if (err) {
             res.status(400).send({code : err.code, errno : err.errno});
             return;
@@ -51,8 +46,7 @@ function getUserOrder(req, res){
         return
     }
 
-    let sql_query = mysql.format("SELECT * FROM orders WHERE users_id = ? && is_active_session = ? ", [users_id, isActive])
-    con.query(sql_query, function(err, result){
+    pool.query("SELECT * FROM orders WHERE users_id = ? && is_active_session = ? ", [users_id, isActive], function(err, result){
         res.status(200).send(result)
         return
     })
@@ -75,8 +69,7 @@ function getTableOrder(req, res){
         return
     }
 
-    let sql_query = mysql.format("SELECT * FROM orders WHERE tables_id = ? && is_active_session = ? ", [tables_id, isActive])
-    con.query(sql_query, function(err, result) {
+    pool.query("SELECT * FROM orders WHERE tables_id = ? && is_active_session = ? ", [tables_id, isActive], function(err, result) {
         res.status(200).send(result)
         return
     })
@@ -102,8 +95,7 @@ function updateOrderSessionStatus(req, res){
         return
     }
 
-    let sql_query = mysql.format("UPDATE orders SET is_active_session = ? WHERE id = ?", [isActive, orderId])
-    con.query(sql_query, function(err, result){
+    pool.query("UPDATE orders SET is_active_session = ? WHERE id = ?", [isActive, orderId], function(err, result){
         res.status(200).send()
         return
     })
@@ -129,8 +121,7 @@ function updateOrderPaidStatus(req, res){
         return
     }
 
-    let sql_query = mysql.format("UPDATE orders SET has_paid = ? WHERE id = ?", [hasPaid,orderId])
-    con.query(sql_query, function(err, result) {
+    pool.query("UPDATE orders SET has_paid = ? WHERE id = ?", [hasPaid,orderId], function(err, result) {
         res.status(200).send()
         return
     })
