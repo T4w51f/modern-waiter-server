@@ -16,8 +16,8 @@ function getRestaurant(req, res){
         // return
     }
 
-    pool.query("SELECT * FROM restaurant WHERE id = ?", [id], function(err, result){
-        res.status(200).send(result)
+    pool.query('SELECT * FROM restaurant WHERE id = ?', [id], function(err, result){
+        res.status(200).json(result)
         // return
     })
 }
