@@ -13,12 +13,12 @@ function getRestaurant(req, res){
     let id = parseInt(req.params.id,10)
     if (isNaN(id)){
         res.status(400).send("Invalid id type, must be an integer")
-        return
+        // return
     }
 
     pool.query("SELECT * FROM restaurant WHERE id = ?", [id], function(err, result){
         res.status(200).send(result)
-        return
+        // return
     })
 }
 
