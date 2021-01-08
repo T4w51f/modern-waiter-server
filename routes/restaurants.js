@@ -17,11 +17,12 @@ function getRestaurant(req, res){
         return
     }
 
-    pool.query("SELECT * FROM restaurant WHERE id = ?", [id], function(err, result){
-        console.log("Result = ", result, ", id = ", id)
-        res.status(200).send(result)
-        return
-    })
+    pool.query("SELECT * FROM restaurant WHERE id = ?", [id], (error, results) => {
+        if (error) {
+          throw error
+        }
+        res.status(200).json(results.rows)
+      })
 }
 
 /**
