@@ -14,16 +14,8 @@ const { pool } = require('./config')
 
 app.use(express.json())
 
-con.connect(function(err) {
-    if (err) throw err
-    console.log("Connected!")
-
-    if (process.env.NODE_ENV !== 'test') {
-        var server = app.listen(3000,function(){
-            var port = server.address().port
-            console.log("Server started listening at %s", port)
-        })
-    }
+app.listen(process.env.PORT || 3002, () => {
+    console.log(`Server listening`)
 })
 
 /*********************** REST API routes ****************************/
