@@ -16,6 +16,7 @@
     "firebase-admin": "^9.4.1",
     "firebase-functions": "^3.11.0",
     "mysql": "^2.18.1",
+    "pg": "^8.5.1",
     "save": "^2.4.0",
     "string.prototype.startswith": "^1.0.0",
     "stripe": "^8.118.0"
