@@ -17,8 +17,12 @@ function getOrderedItems(req, res){
         return
     }
 
-    pool.query("SELECT * FROM ordered_items WHERE orders_id = ?", [orderId], function(err, result){
-        res.status(200).send(result)
+    pool.query("SELECT * FROM ordered_items WHERE orders_id = $1", [orderId], function(err, result){
+        if(err){
+            res.status(400).send(err)
+            return
+        }
+        res.status(200).send(result.rows)
         return
     })
 }
@@ -43,7 +47,12 @@ async function addOrderedItems(req, res){
             return
         }
         
-        pool.query("INSERT INTO ordered_items (orders_id, items_id, has_paid, is_selected) VALUES(?, ?, 0, 0) ", [orderId,itemId], function(err, result){})
+        pool.query("INSERT INTO ordered_items (orders_id, items_id, has_paid, is_selected) VALUES($1, $2, 0, 0) ", [orderId,itemId], function(err, result){
+            if(err){
+                res.status(400).send(err)
+                return
+            }
+        })
     }
 
     let orderId = parseInt(ordered_items[0].orderId,10)
@@ -69,7 +78,12 @@ async function updateSelectedStatus(req, res){
     }
 
     let notIsSelected = isSelected === 1 ? 0 : 1
-    pool.query("UPDATE ordered_items SET is_selected = ?, users_id = ? WHERE orders_id = ? && items_id = ? && is_selected = ? && has_paid = 0 LIMIT 1", [isSelected, userId, orderId, itemId, notIsSelected], async function(err, result){
+    pool.query("UPDATE ordered_items SET is_selected = $1, users_id = $2 WHERE orders_id = $3 && items_id = $4 && is_selected = $5 && has_paid = 0 LIMIT 1", [isSelected, userId, orderId, itemId, notIsSelected], async function(err, result){
+        if(err){
+            res.status(400).send(err)
+            return
+        }
+
         res.status(200).send()
         await push_notification.push_notification_item_claimed(orderId)
         console.log(orderId + ":" + isSelected + " by " + userId + " for " + itemId)
@@ -95,7 +109,11 @@ function updateOrderedItemPaidStatus(req, res){
     let notHasPaid = hasPaid === 1 ? 0 : 1
     console.log("PUT /ordered-items/paid" + " for item: " + itemId + " in order: " + orderId + " to status: " + hasPaid)
 
-    pool.query("UPDATE ordered_items SET has_paid = ? WHERE orders_id = ? && items_id = ? && has_paid = ? LIMIT 1", [hasPaid, orderId, itemId, notHasPaid], function(err, result){
+    pool.query("UPDATE ordered_items SET has_paid = $1 WHERE orders_id = $2 && items_id = $3 && has_paid = $4 LIMIT 1", [hasPaid, orderId, itemId, notHasPaid], function(err, result){
+        if(err){
+            res.status(400).send(err)
+            return
+        }
         res.status(201).send()
         return
     })

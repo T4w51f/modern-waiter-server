@@ -16,8 +16,12 @@ function getUserById(req, res){
         return
     }
     
-    pool.query("SELECT * FROM users WHERE id = ?", [id], function(err, result){
-        res.status(200).send(result[0])
+    pool.query("SELECT * FROM users WHERE id = $1", [id], function(err, result){
+        if(err){
+            res.status(400).send(err)
+            return
+        }
+        res.status(200).send(result.rows[0])
         return
     })
 }
@@ -32,8 +36,12 @@ function getUserById(req, res){
 function getUserByGoogleId(req, res){
     console.log("GET /users/google/{{googleId}}")
     let googleId = req.params.googleId
-    pool.query("SELECT * FROM users WHERE google_id = ?", [googleId], function(err, result){
-        res.status(200).send(result[0])
+    pool.query("SELECT * FROM users WHERE google_id = $1", [googleId], function(err, result){
+        if(err){
+            res.status(400).send(err)
+            return
+        }
+        res.status(200).send(result.rows[0])
         return
     })
 }
@@ -51,7 +59,7 @@ function addUser(req, res){
     let googleId = req.body.googleId
     let preferences = req.body.preferences 
 
-    pool.query("INSERT INTO users (username, email, preferences, google_id) VALUES (?, ?, ?, ?)", [username, email, preferences, googleId], function(err, result){
+    pool.query("INSERT INTO users (username, email, preferences, google_id) VALUES ($1, $2, $3, $4)", [username, email, preferences, googleId], function(err, result){
         if (err) {
             res.status(400).send(err)
             return
@@ -76,8 +84,12 @@ function getUserPreferences(req, res){
         return
     }
 
-    pool.query("SELECT preferences FROM users WHERE id = ?", [id], function(err, result){
-        res.status(200).send(result[0])
+    pool.query("SELECT preferences FROM users WHERE id = $1", [id], function(err, result){
+        if(err){
+            res.status(400).send(err)
+            return
+        }
+        res.status(200).send(result.rows[0])
         return
     })
 }
@@ -104,7 +116,11 @@ function updateUserPreferences(req, res){
         return
     }
 
-    pool.query("UPDATE users SET preferences = ? WHERE id = ?", [preferences, userId], function(err, result){
+    pool.query("UPDATE users SET preferences = $1 WHERE id = $2", [preferences, userId], function(err, result){
+        if(err){
+            res.status(400).send(err)
+            return
+        }
         res.status(200).send()
         return
     })

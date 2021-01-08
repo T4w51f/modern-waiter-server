@@ -19,10 +19,10 @@ function createOrder(req, res){
         return
     }
 
-    pool.query("INSERT INTO orders ( users_id, tables_id, restaurant_id, amount, has_paid, is_active_session) VALUES(?,?,?,?,?,?)", [userId, tableId, restaurantId, amount, hasPaid, isActive], function(err, result){
-        if (err) {
-            res.status(400).send({code : err.code, errno : err.errno});
-            return;
+    pool.query("INSERT INTO orders ( users_id, tables_id, restaurant_id, amount, has_paid, is_active_session) VALUES($1,$2,$3,$4,$5,$6)", [userId, tableId, restaurantId, amount, hasPaid, isActive], function(err, result){
+        if(err){
+            res.status(400).send(err)
+            return
         }
         res.status(201).send()
         return
@@ -46,8 +46,12 @@ function getUserOrder(req, res){
         return
     }
 
-    pool.query("SELECT * FROM orders WHERE users_id = ? && is_active_session = ? ", [users_id, isActive], function(err, result){
-        res.status(200).send(result)
+    pool.query("SELECT * FROM orders WHERE users_id = $1 && is_active_session = $2 ", [users_id, isActive], function(err, result){
+        if(err){
+            res.status(400).send(err)
+            return
+        }
+        res.status(200).send(result.rows)
         return
     })
 }
@@ -69,8 +73,12 @@ function getTableOrder(req, res){
         return
     }
 
-    pool.query("SELECT * FROM orders WHERE tables_id = ? && is_active_session = ? ", [tables_id, isActive], function(err, result) {
-        res.status(200).send(result)
+    pool.query("SELECT * FROM orders WHERE tables_id = $1 && is_active_session = $2 ", [tables_id, isActive], function(err, result) {
+        if(err){
+            res.status(400).send(err)
+            return
+        }
+        res.status(200).send(result.rows)
         return
     })
 }
@@ -95,7 +103,11 @@ function updateOrderSessionStatus(req, res){
         return
     }
 
-    pool.query("UPDATE orders SET is_active_session = ? WHERE id = ?", [isActive, orderId], function(err, result){
+    pool.query("UPDATE orders SET is_active_session = $1 WHERE id = $2", [isActive, orderId], function(err, result){
+        if(err){
+            res.status(400).send(err)
+            return
+        }
         res.status(200).send()
         return
     })
@@ -121,7 +133,11 @@ function updateOrderPaidStatus(req, res){
         return
     }
 
-    pool.query("UPDATE orders SET has_paid = ? WHERE id = ?", [hasPaid,orderId], function(err, result) {
+    pool.query("UPDATE orders SET has_paid = $1 WHERE id = $2", [hasPaid,orderId], function(err, result) {
+        if(err){
+            res.status(400).send(err)
+            return
+        }
         res.status(200).send()
         return
     })

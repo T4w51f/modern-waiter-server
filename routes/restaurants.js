@@ -22,7 +22,7 @@ function getRestaurant(req, res){
             res.status(400).send(err)
             return
         }
-        
+
         res.status(200).send(result.rows)
         return
     })
@@ -46,12 +46,12 @@ function addRestaurant(req, res){
     let name = req.body.name
     let location = req.body.location
 
-    pool.query("INSERT INTO restaurant (name, location, tax_percentage, service_fee_percentage) VALUES (?, ?, ?, ?)", [name, location, taxPercentage, serviceFeePercentage], function(err, result){
+    pool.query("INSERT INTO restaurant (name, location, tax_percentage, service_fee_percentage) VALUES ($1, $2, $3, $4)", [name, location, taxPercentage, serviceFeePercentage], function(err, result){
         if (err) {
-            res.status(400).send({code : err.code, errno : err.errno})
+            res.status(400).send(err)
             return
         }
-        res.status(200).send(result)
+        res.status(200).send(result.rows)
         return
     })
 }

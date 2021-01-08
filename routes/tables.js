@@ -17,8 +17,12 @@ function getTable(req, res) {
         return
     }
 
-    pool.query("SELECT * FROM tables WHERE id = ?", [id], function(err, result){
-        res.status(200).send(result[0])
+    pool.query("SELECT * FROM tables WHERE id = $1", [id], function(err, result){
+        if(err){
+            res.status(400).send(err)
+            return
+        }
+        res.status(200).send(result.rows[0])
         return
     })
 }
@@ -38,8 +42,12 @@ function addTable(req, res) {
         return
     }
 
-    pool.query("INSERT INTO tables (table_number) VALUES (?)", [tableNumber], function(err, result){
-        res.status(200).send(result)
+    pool.query("INSERT INTO tables (table_number) VALUES ($1)", [tableNumber], function(err, result){
+        if(err){
+            res.status(400).send(err)
+            return
+        }
+        res.status(200).send(result.rows)
         return
     })
 }

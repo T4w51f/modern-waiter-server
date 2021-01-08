@@ -1,4 +1,4 @@
-const pool = require("../config.js")
+const { pool } = require('./../config')
 
 /**
  * Acquires items of a restaurant representing its 
@@ -16,8 +16,13 @@ function getMenu(req, res){
         return
     }
 
-    pool.query("SELECT * FROM items WHERE restaurant_id = ?", [restaurantId], function(err, result){
-        res.status(200).send(result)
+    pool.query("SELECT * FROM items WHERE restaurant_id = $1", [restaurantId], function(err, result){
+        if(err){
+            res.status(400).send(err)
+            return
+        }
+
+        res.status(200).send(result.rows)
         return
     })
 }
@@ -43,12 +48,12 @@ function addToMenu(req, res){
         return
     }
 
-    pool.query("INSERT INTO items (restaurant_id, name, type, cost, description, calories, popularity_count, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [restaurantId, name, type, cost, description, calories, popularityCount, image], function(err, result){
-        if (err) {
-            res.status(400).send({code : err.code, errno : err.errno})
+    pool.query("INSERT INTO items (restaurant_id, name, type, cost, description, calories, popularity_count, image) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)", [restaurantId, name, type, cost, description, calories, popularityCount, image], function(err, result){
+        if(err){
+            res.status(400).send(err)
             return
         }
-        res.status(200).send(result)
+        res.status(200).send(result.rows)
         return
     })
 }

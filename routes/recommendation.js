@@ -23,7 +23,12 @@ function getItemRecommendation(req, res){
     console.log("User: " + users_id)
     console.log("Restaurant: " + restaurant_id)
 
-    pool.query("SELECT preferences FROM users WHERE id = ?", [users_id], function(err, prefResult){
+    pool.query("SELECT preferences FROM users WHERE id = $1", [users_id], function(err, prefResult){
+        if(err){
+            res.status(400).send(err)
+            return
+        }
+
         var preference
 
         try {
@@ -33,7 +38,12 @@ function getItemRecommendation(req, res){
             return
         }
 
-        pool.query("SELECT id, description FROM items WHERE restaurant_id = ?", [restaurant_id], function(err, descResult) {
+        pool.query("SELECT id, description FROM items WHERE restaurant_id = $1", [restaurant_id], function(err, descResult) {
+            if(err){
+                res.status(400).send(err)
+                return
+            }
+            
             var descriptionJsonArray = JSON.parse(JSON.stringify(descResult))
             var itemDescriptionMap = new Map()
 
