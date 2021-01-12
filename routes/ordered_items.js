@@ -78,7 +78,7 @@ async function updateSelectedStatus(req, res){
     }
 
     let notIsSelected = isSelected === 1 ? 0 : 1
-    pool.query("UPDATE ordered_items SET is_selected = $1, users_id = $2 WHERE orders_id = $3 && items_id = $4 && is_selected = $5 && has_paid = 0 LIMIT 1", [isSelected, userId, orderId, itemId, notIsSelected], async function(err, result){
+    pool.query("UPDATE ordered_items SET is_selected = $1, users_id = $2 WHERE id IN (SELECT id FROM ordered_items WHERE orders_id = $3 and items_id = $4 and is_selected = $5 and has_paid = 0 LIMIT 1)", [isSelected, userId, orderId, itemId, notIsSelected], async function(err, result){
         if(err){
             res.status(400).send(err)
             return
@@ -109,7 +109,7 @@ function updateOrderedItemPaidStatus(req, res){
     let notHasPaid = hasPaid === 1 ? 0 : 1
     console.log("PUT /ordered-items/paid" + " for item: " + itemId + " in order: " + orderId + " to status: " + hasPaid)
 
-    pool.query("UPDATE ordered_items SET has_paid = $1 WHERE orders_id = $2 && items_id = $3 && has_paid = $4 LIMIT 1", [hasPaid, orderId, itemId, notHasPaid], function(err, result){
+    pool.query("UPDATE ordered_items SET has_paid = $1 WHERE id IN (SELECT id FROM ordered_items WHERE orders_id = $2 and items_id = $3 and has_paid = $4 LIMIT 1)", [hasPaid, orderId, itemId, notHasPaid], function(err, result){
         if(err){
             res.status(400).send(err)
             return
