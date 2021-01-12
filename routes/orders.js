@@ -46,7 +46,7 @@ function getUserOrder(req, res){
         return
     }
 
-    pool.query("SELECT * FROM orders WHERE users_id = $1 && is_active_session = $2 ", [users_id, isActive], function(err, result){
+    pool.query("SELECT * FROM orders WHERE users_id = $1 and is_active_session = $2 ", [users_id, isActive], function(err, result){
         if(err){
             res.status(400).send(err)
             return
@@ -73,8 +73,9 @@ function getTableOrder(req, res){
         return
     }
 
-    pool.query("SELECT * FROM orders WHERE tables_id = $1 && is_active_session = $2", [tables_id, isActive], function(err, result) {
+    pool.query("SELECT * FROM orders WHERE tables_id = $1 and is_active_session = $2", [tables_id, isActive], function(err, result) {
         if(err){
+            console.log("tables_id: ", tables_id, ", isActive: ", isActive)
             res.status(400).send(err)
             return
         }
