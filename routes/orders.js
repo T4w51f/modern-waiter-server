@@ -73,7 +73,7 @@ function getTableOrder(req, res){
         return
     }
 
-    pool.query("SELECT * FROM orders WHERE tables_id = $1 && is_active_session = $2 ", [tables_id, isActive], function(err, result) {
+    pool.query("SELECT * FROM orders WHERE tables_id = $1 && is_active_session = $2", [tables_id, isActive], function(err, result) {
         if(err){
             res.status(400).send(err)
             return
