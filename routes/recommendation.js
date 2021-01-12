@@ -32,7 +32,7 @@ function getItemRecommendation(req, res){
         var preference
 
         try {
-            preference = prefResult[0]["preferences"]
+            preference = prefResult.rows[0]["preferences"]
         } catch (error) {
             res.status(400).send({message: "Failed to get user preference, check if userId is valid"})
             return
@@ -44,7 +44,7 @@ function getItemRecommendation(req, res){
                 return
             }
             
-            var descriptionJsonArray = JSON.parse(JSON.stringify(descResult))
+            var descriptionJsonArray = JSON.parse(JSON.stringify(descResult.rows))
             var itemDescriptionMap = new Map()
 
             descriptionJsonArray.forEach(item => {
